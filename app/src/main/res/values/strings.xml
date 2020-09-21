@@ -1,0 +1,16 @@
+<resources>
+
+<!--    base texts-->
+    <string name="empty">Null</string>
+    <string name="app_name">REC_app</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
+<!--    Welcome Page-->
+
+    <string name="welcomeBtn">Let\'s get started</string>
+    <string name="welcomeMsg">Welcome</string>
+
+</resources>
