@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val msg = "Want to play some sport? \n\n Need a friend to play \n\n There you are in right place"
+        val msg = "Want to play some sport? \n\n Need a friend to play? \n\n There you are in right place"
         welcomeMsg.text = msg
     }
 
