@@ -4,8 +4,10 @@
     <string name="empty">Null</string>
     <string name="app_name">Recreation Center app</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_event">Play</string>
+    <string name="title_post">Learn</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_profile">Profile</string>
 
 
     <!--    Welcome Page-->
@@ -21,4 +23,13 @@
     <string name="facebook">Facebook</string>
     <string name="registerHint">Don\'t have an account?</string>
     <string name="registerLink">Click here to Sign up</string>
+    <string name="signIn">Sign in</string>
+
+<!--    Register Page-->
+    <string name="fNameHint">First name</string>
+    <string name="lNameHint">Last name</string>
+    <string name="phoneHint">Phone number</string>
+    <string name="reg_registerHint">Already have an account?</string>
+    <string name="reg_registerLink">Click here to Sign in</string>
+    <string name="createAcc">Register</string>
 </resources>

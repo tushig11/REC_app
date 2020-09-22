@@ -4,25 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme"
     android:orientation="vertical"
+    android:theme="@style/AppTheme"
     tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="@string/empty"
         android:layout_gravity="center"
-        android:src="@drawable/logo_miu"
         android:layout_marginTop="30dp"
-        />
+        android:contentDescription="@string/empty"
+        android:src="@drawable/logo_miu" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailTxt"
+        style="@style/textInputStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textInputStyle" >
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailInput"
@@ -33,24 +32,39 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passTxt"
+        style="@style/textInputStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textInputStyle"  >
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/passHint" />
+            android:hint="@string/passHint"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/textButton"
+        android:onClick="login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signIn"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="30dp"
         android:orientation="horizontal">
 
 
@@ -66,60 +80,59 @@
             android:id="@+id/orText"
             android:layout_width="150dp"
             android:layout_height="20dp"
-            android:layout_weight="1"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/or" />
+            android:text="@string/or"
+            android:visibility="visible" />
 
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:src="@drawable/stroke"
-            android:layerType="software"
             android:layout_weight="2"
-            android:contentDescription="@string/empty"/>
+            android:contentDescription="@string/empty"
+            android:layerType="software"
+            android:src="@drawable/stroke" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/googleBtn"
-            android:onClick="googleLogin"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
             android:layout_marginStart="30dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="1"
+            android:onClick="googleLogin"
+            android:text="@string/google"
             app:icon="@drawable/logo_google"
             app:iconSize="24dp"
-            app:iconTint="@null"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:text="@string/google"
-             />
+            app:iconTint="@null" />
 
         <Button
             android:id="@+id/facebookBtn"
-            android:onClick="facebookLogin"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/facebook"
-            android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginEnd="30dp"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:onClick="facebookLogin"
+            android:text="@string/facebook"
             app:icon="@drawable/logo_fb"
             app:iconSize="24dp"
-            app:iconTint="@null"
-            />
+            app:iconTint="@null" />
     </LinearLayout>
 
     <RelativeLayout
@@ -130,30 +143,28 @@
             android:id="@+id/registerHint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/registerLink"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="@string/registerHint"
             android:textColor="@color/colorPrimary"
-            android:layout_above="@+id/registerLink"
-            android:layout_marginBottom="10dp"
-            android:textStyle="bold"
             android:textSize="13sp"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/registerLink"
-            android:onClick="register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
             android:gravity="center"
+            android:onClick="register"
             android:text="@string/registerLink"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="40dp"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
-
 
 
 </LinearLayout>
