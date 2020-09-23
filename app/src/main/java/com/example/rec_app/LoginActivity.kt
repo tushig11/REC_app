@@ -26,11 +26,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun googleLogin(view: View){
-        Toast.makeText(this, "Google clicked", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Google login coming soon", Toast.LENGTH_LONG).show()
     }
 
     fun facebookLogin(view: View){
-        Toast.makeText(this, "Facebook clicked", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Facebook login coming soon", Toast.LENGTH_LONG).show()
     }
 
     fun login(view: View){
