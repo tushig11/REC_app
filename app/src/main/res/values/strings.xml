@@ -24,6 +24,7 @@
     <string name="registerHint">Don\'t have an account?</string>
     <string name="registerLink">Click here to Sign up</string>
     <string name="signIn">Sign in</string>
+    <string name="forgotPassword">Forgot Password?</string>
 
 <!--    Register Page-->
     <string name="fNameHint">First name</string>

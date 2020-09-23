@@ -19,12 +19,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         auth = Firebase.auth
-    }
 
-    override fun onStart(){
-        super.onStart();
-        val currentUser = auth.currentUser
-//        updateUI(currentUser)
+        forgotPassword.setOnClickListener{
+            resetPassword(it)
+        }
     }
 
     fun googleLogin(view: View){
@@ -73,9 +71,30 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun saveLoggedUser(id: String){
-        var spf = getSharedPreferences("loggedUser", 0)
+        val spf = getSharedPreferences("loggedUser", 0)
         val editor = spf.edit()
         editor.putString("userID", id)
         editor.apply()
+    }
+
+    private fun resetPassword(view: View){
+        val email = emailInput.text.toString().trim()
+        // Empty input checking
+        if(TextUtils.isEmpty(email)){
+            emailInput.error = "Email address required"
+            return
+        }
+        // Empty input checking
+        if(TextUtils.isEmpty(email)){
+            emailInput.error = "Email address required"
+            return
+        }
+
+        Firebase.auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Email sent.", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 }
