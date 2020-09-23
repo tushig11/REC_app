@@ -1,5 +1,6 @@
 package com.example.rec_app.repository
 
+import android.util.Log
 import com.example.rec_app.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
@@ -37,4 +38,14 @@ class FirestoreRepository {
             ))
     }
 
+    fun createNewUser(user: User){
+        db.collection("users").document("DocumentName")
+            .set(user)
+            .addOnSuccessListener {
+                Log.d("HomeActivity","Document added $it")
+            }
+            .addOnFailureListener(){
+                Log.d("HomeActivity","Document added ${it.toString()}")
+            }
+    }
 }
