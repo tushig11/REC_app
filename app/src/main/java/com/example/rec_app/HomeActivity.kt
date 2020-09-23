@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
 
-        Toast.makeText(this, getCurrentUser(), Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, getCurrentUser(), Toast.LENGTH_SHORT).show()
 
     }
 

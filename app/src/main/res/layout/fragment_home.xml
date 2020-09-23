@@ -62,83 +62,81 @@
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp" />
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginBottom="70dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp">
+
+            <Button
+                android:id="@+id/playBtn"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/title_event"
+                android:backgroundTint="#ff9d76"
+                app:iconTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                app:icon="@drawable/calendar_icon"
+                app:iconSize="24dp" />
 
-                <Button
-                    android:id="@+id/playBtn"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:text="@string/title_event"
-                    android:backgroundTint="#ff9d76"
-                    app:iconTint="@color/colorWhite"
-                    android:textColor="@color/colorWhite"
-                    app:icon="@drawable/calendar_icon"
-                    app:iconSize="24dp" />
+            <Button
+                android:id="@+id/calendarBtn"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/title_calendar"
+                app:icon="@drawable/play_icon"
+                app:iconSize="24dp"
+                android:backgroundTint="#f3c623"
+                app:iconTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
-                <Button
-                    android:id="@+id/calendarBtn"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/title_calendar"
-                    app:icon="@drawable/play_icon"
-                    app:iconSize="24dp"
-                    android:backgroundTint="#f3c623"
-                    app:iconTint="@color/colorWhite"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
-
-                <Button
-                    android:id="@+id/learnBtn"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/title_post"
-                    app:icon="@drawable/learn_icon"
-                    app:iconSize="24dp"
-                    android:backgroundTint="#44d8ca"
-                    app:iconTint="@color/colorWhite"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"/>
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/home_playImage"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:src="@drawable/home_play"
-                android:contentDescription="@null"/>
-
-            <ImageView
-                android:id="@+id/home_learnImage"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:src="@drawable/home_learn"
-                android:contentDescription="@null"/>
+            <Button
+                android:id="@+id/learnBtn"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/title_post"
+                app:icon="@drawable/learn_icon"
+                app:iconSize="24dp"
+                android:backgroundTint="#44d8ca"
+                app:iconTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"/>
         </LinearLayout>
-    </ScrollView>
+
+        <ImageView
+            android:id="@+id/home_playImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/home_play"
+            android:contentDescription="@null"/>
+
+        <ImageView
+            android:id="@+id/home_learnImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/home_learn"
+            android:contentDescription="@null"/>
+    </LinearLayout>
+
 
 </LinearLayout>
