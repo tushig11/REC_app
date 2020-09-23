@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Toast.makeText(baseContext, "Logged in successfully.",
                         Toast.LENGTH_SHORT).show()
-                    val user = auth.currentUser
+                    auth.currentUser?.uid?.let { saveLoggedUser(it) }
                     startActivity(Intent(this, HomeActivity::class.java))
                 } else {
                     // If sign in fails, display a message to the user.
@@ -72,22 +72,10 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-
-    private fun getUser(){
-        val user = Firebase.auth.currentUser
-        user?.let {
-            // Name, email address, and profile photo Url
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
-
-            // Check if user's email is verified
-            val emailVerified = user.isEmailVerified
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            val uid = user.uid
-        }
+    private fun saveLoggedUser(id: String){
+        var spf = getSharedPreferences("loggedUser", 0)
+        val editor = spf.edit()
+        editor.putString("userID", id)
+        editor.apply()
     }
 }

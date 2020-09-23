@@ -32,4 +32,9 @@
     <string name="reg_registerHint">Already have an account?</string>
     <string name="reg_registerLink">Click here to Sign in</string>
     <string name="createAcc">Register</string>
+
+<!--    Profile Page-->
+    <string name="updateProfile">Update profile</string>
+    <string name="editProfile">Edit profile</string>
+    <string name='logout'>Logout</string>
 </resources>

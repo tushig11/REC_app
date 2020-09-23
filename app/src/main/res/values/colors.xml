@@ -6,4 +6,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorRed">#E62929</color>
+    <color name="enabled_color">#000</color>
+    <color name="disabled_color">#000</color>
 </resources>
