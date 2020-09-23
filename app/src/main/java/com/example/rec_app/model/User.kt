@@ -3,6 +3,7 @@ package com.example.rec_app.model
 import java.io.Serializable
 
 class User: Serializable{
+    var id: String? = "0"
     var fname: String = "Guest"
     var lname: String ="Guest"
     var email: String = "guest@gmail.com"
@@ -11,7 +12,8 @@ class User: Serializable{
 
     constructor()
 
-    constructor(fname: String, lname: String, email: String, imagePath:String?, phone: String){
+    constructor(id: String, fname: String, lname: String, email: String, imagePath:String?, phone: String){
+        this.id= id
         this.fname = fname
         this.lname = lname
         this.email = email

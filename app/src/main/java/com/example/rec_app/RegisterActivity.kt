@@ -56,8 +56,6 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        val newUser = User(fname, lname, email,null, phone )
-
         auth.createUserWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -71,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
 
                     if (userId != null) {
                         db.collection("users").document(userId)
-                            .set(newUser)
+                            .set(User(userId, fname, lname, email,null, phone ))
                             .addOnSuccessListener {
                                 Log.d("HomeActivity","Document added $it")
                             }
