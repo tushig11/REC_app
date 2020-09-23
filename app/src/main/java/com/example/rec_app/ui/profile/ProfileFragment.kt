@@ -1,7 +1,6 @@
 package com.example.rec_app.ui.profile
 
 import android.app.Activity.RESULT_OK
-import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -20,16 +19,14 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.rec_app.MainActivity
 import com.example.rec_app.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
-import java.io.File
-import java.io.FileInputStream
 
 class ProfileFragment : Fragment() {
     private val storage = Firebase.storage
@@ -51,7 +48,7 @@ class ProfileFragment : Fragment() {
             emailInput.text = it.email.toEditable()
             phoneInput.text = it.phone.toEditable()
 
-            if (it.imagePath != null){
+            if (it.imagePath != null) {
                 imagePath = it.imagePath
             }
 
@@ -66,6 +63,14 @@ class ProfileFragment : Fragment() {
         root.logout_profile.setOnClickListener(){
             startActivity(Intent(root.context, MainActivity::class.java))
             FirebaseAuth.getInstance().signOut()
+
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+            val googleSignInClient = GoogleSignIn.getClient(root.context, gso);
+            googleSignInClient.signOut()
             Toast.makeText(root.context, "Logged out successfully", Toast.LENGTH_SHORT).show()
         }
         return root

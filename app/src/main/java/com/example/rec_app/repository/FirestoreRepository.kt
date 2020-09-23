@@ -31,6 +31,16 @@ class FirestoreRepository {
             ))
     }
 
+    fun addUser(id: String, user: User){
+        db.collection("users").document(id)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d("HomeActivity","Document added $it")
+            }
+            .addOnFailureListener(){
+                Log.d("HomeActivity","Document added ${it.toString()}")
+            }
+    }
     fun updateProfileImage(imagePath: String){
         db.collection("users").document(user!!.uid)
             .update(mapOf(

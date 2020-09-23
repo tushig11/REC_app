@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rec_app.model.User
+import com.example.rec_app.repository.FirestoreRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -68,15 +69,8 @@ class RegisterActivity : AppCompatActivity() {
                     val userId = auth.currentUser?.uid
 
                     if (userId != null) {
-                        db.collection("users").document(userId)
-                            .set(User(userId, fname, lname, email,null, phone ))
-                            .addOnSuccessListener {
-                                Log.d("HomeActivity","Document added $it")
-                            }
-                            .addOnFailureListener(){
-                                Log.d("HomeActivity","Document added ${it.toString()}")
-                            }
-
+                        val newUser = User(userId, fname, lname, email,null, phone )
+                        FirestoreRepository().addUser(userId, newUser)
                         saveLoggedUser(userId)
                     }
 
