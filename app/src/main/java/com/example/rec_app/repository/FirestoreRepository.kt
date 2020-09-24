@@ -1,9 +1,9 @@
 package com.example.rec_app.repository
 
 import android.util.Log
+import com.example.rec_app.classes.SportActivity
 import com.example.rec_app.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -14,6 +14,11 @@ class FirestoreRepository {
     var user = FirebaseAuth.getInstance().currentUser
 
     // get saved users from fire store
+
+    fun getLoggedUserID(): String{
+        return FirebaseAuth.getInstance().currentUser!!.uid
+    }
+
     fun getUsers(): ArrayList<User> {
         val users = ArrayList<User>()
             db.collection("users").get().addOnSuccessListener {
@@ -54,6 +59,7 @@ class FirestoreRepository {
                 Log.d("HomeActivity","Document added ${it.toString()}")
             }
     }
+
     fun updateProfileImage(imagePath: String){
         db.collection("users").document(user!!.uid)
             .update(mapOf(
@@ -61,4 +67,14 @@ class FirestoreRepository {
             ))
     }
 
+    fun saveSportActivity(activity: SportActivity){
+        db.collection("activities").document(activity.id.toString())
+            .set(activity)
+            .addOnSuccessListener {
+                Log.d("Repository","Document added $it")
+            }
+            .addOnFailureListener(){
+                Log.d("Repository","Document added ${it.toString()}")
+            }
+    }
 }

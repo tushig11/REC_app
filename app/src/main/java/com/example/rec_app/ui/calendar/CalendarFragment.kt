@@ -51,6 +51,7 @@ class CalendarFragment : Fragment() {
             EventObjects("THIS IS 22ND",convertStringToDate("22-09-2020 21:00"),convertStringToDate("22-09-2020 22:00")),
             EventObjects("THIS IS 23RD",convertStringToDate("23-09-2020 07:00"),convertStringToDate("23-09-2020 08:00"))
         )
+
         display_current_date.text = displayDateInString(cal.time)
         displayDailyEvents()
 

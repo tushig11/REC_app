@@ -60,10 +60,12 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val listView: ListView = findViewById<ListView>(R.id.playpals_list)
 
         val listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, friendsList)
-        listView.setAdapter(listAdapter)
+        listView.adapter = listAdapter
+
 
         autotextView.onItemClickListener = AdapterView.OnItemClickListener{
                 parent, view, position, id ->
+
             val u: User = parent.getItemAtPosition(position) as User
             val fullname = u.toString()
 
@@ -73,12 +75,6 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
             toast(fullname + " is added to invite list")
         }
-        //inviteButton.setOnClickListener(View.OnClickListener {
-        /*btn_invite.setOnClickListener(View.OnClickListener {
-            //friendsList.add(autotextView.text.toString())
-            listAdapter.notifyDataSetChanged()
-            autotextView.text.clear()
-        })*/
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -247,7 +243,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         //return FirestoreRepository().getLoggedUserId()
         return "userId"
     }
-
+    
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateDateText() {
         if(aNewActivity?.date == null)
