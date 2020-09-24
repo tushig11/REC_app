@@ -5,3 +5,6 @@ MIU’s current students can register to the system and login with registered us
 Once user enter to the system, he/she can create a new activity for available time and date. 
 Also, the user has a possibility invite his friend to play with as well as able to see activity history. 
 In addition, the system has a learn part which contains video tutorial.
+
+![GitHub Logo](/app/src/main/res/drawable-v24/image_welcome.jpg)
+Format: ![Alt Text](url)
