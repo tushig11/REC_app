@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+        <TableRow
+            android:layout_margin="5dp"
+            android:padding="5dp">
+            <TextView
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/sport_type"
+                android:layout_width="wrap_content"/>
+
+            <Spinner
+                android:id ="@+id/sport_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:entries="@array/sport_types"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:padding="5dp">
+            <TextView
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"/>
+            <Button
+                android:id="@+id/btn_date_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/choose_date"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/start_time"
+                android:layout_width="wrap_content"/>
+
+            <Button
+                android:id="@+id/btn_starting_time_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/choose_start_time"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/end_time"
+                android:layout_width="wrap_content"/>
+
+            <Button
+                android:id="@+id/btn_ending_time_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_end_time"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/playpals"
+                android:layout_width="wrap_content"/>
+
+            <LinearLayout
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/playpals_choose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/type_friends"
+                    android:layout_marginRight="5dp"/>
+
+                <Button
+                    android:id="@+id/btn_invite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/add"
+                    android:textColor="@color/colorWhite"/>
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/invited_friends">
+            </TextView>
+
+            <ListView
+                android:id="@+id/playpals_list"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:hint="@string/playpals">
+            </ListView>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/create_activity"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:onClick="createActivity" />
+
+
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.sportActivity.SportActivityFragment" >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+        <Button
+            android:id="@+id/createActivityBtn"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingTop="10dp"
+            android:text="@string/create_activity"
+            android:textAllCaps="false"
+            android:onClick="createPlay"
+            android:textColor="@color/colorGrey"
+            app:icon="@drawable/plus_icon"
+            app:iconSize="24dp"
+            app:iconTint="@null" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activitiesView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:padding="15dp"
+            android:text="@string/list_of_activities"/>
+    </LinearLayout>
+
+</FrameLayout>

@@ -4,7 +4,7 @@
     <string name="empty">Null</string>
     <string name="app_name">Recreation Center app</string>
     <string name="title_home">Home</string>
-    <string name="title_event">Play</string>
+    <string name="title_play">Play</string>
     <string name="title_post">Learn</string>
     <string name="title_calendar">Calendar</string>
     <string name="title_profile">Profile</string>
@@ -25,11 +25,40 @@
     <string name="registerLink">Click here to Sign up</string>
     <string name="signIn">Sign in</string>
 
-<!--    Register Page-->
+    <!--    Register Page-->
     <string name="fNameHint">First name</string>
     <string name="lNameHint">Last name</string>
     <string name="phoneHint">Phone number</string>
     <string name="reg_registerHint">Already have an account?</string>
     <string name="reg_registerLink">Click here to Sign in</string>
     <string name="createAcc">Register</string>
+
+    <!--    Activity Page-->
+    <string name="create_activity">Create Activity</string>
+    <string name="your_activities">Your Activities</string>
+    <string name="list_of_activities">List of Activities</string>
+    <string name="playpals">Playpals</string>
+    <string name="date">Date</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="user_name">User name</string>
+    <string name="sport_type">Sport type</string>
+
+    <!-- Create Activity-->
+    <string name="choose_date">Choose date...</string>
+    <string name="choose_start_time">Choose date...</string>
+    <string name="choose_end_time">Choose date...</string>
+    <string name="type_friends">Type your friend name here</string>
+    <string name="invited_friends">Invited friends</string>
+    <string name="add">Add</string>
+
+
+    <string-array name="sport_types">
+        <item>Basketball</item>
+        <item>Badminton</item>
+        <item>Tennis</item>
+        <item>Rock Climbing</item>
+        <item>Aerobic</item>
+        <item>Soccer</item>
+    </string-array>
 </resources>
