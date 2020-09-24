@@ -7,12 +7,13 @@ Also, the user has a possibility invite his friend to play with as well as able 
 In addition, the system has a learn part which contains video tutorial.
 
 <div style="display:flex;">
-<img alt="App image" src="/app/src/main/res/drawable-v24/image_welcome.png" width="30%">
-<img alt="App image" src="/app/src/main/res/drawable-v24/image_login.png" width="30%">
-<img alt="App image" src="/app/src/main/res/drawable-v24/image_home.png" width="30%">
+<img alt="Welcome Page" src="/app/src/main/res/drawable-v24/image_welcome.png" width="30%">
+<img alt="Login Page" src="/app/src/main/res/drawable-v24/image_login.png" width="30%">
+<img alt="Home Page" src="/app/src/main/res/drawable-v24/image_home.png" width="30%">
 </div>
 
 <div style="display:flex;">
-<img alt="App image" src="/app/src/main/res/drawable-v24/image_profile.png" width="30%">
-<img alt="App image" src="/app/src/main/res/drawable-v24/image_events.png" width="30%">
+<img alt="Profile Page" src="/app/src/main/res/drawable-v24/image_profile.png" width="30%">
+<img alt="Events Page" src="/app/src/main/res/drawable-v24/image_events.png" width="30%">
+  <img alt="Calendar Page" src="/app/src/main/res/drawable-v24/image_calendar.png" width="30%">
 </div>
