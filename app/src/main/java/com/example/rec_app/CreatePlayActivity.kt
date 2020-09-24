@@ -159,6 +159,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
                     toast("Invalid end time chosen")
                     aNewActivity?.endTime = null;
                 }
+                updateEndTimeText()
             },
             mHour,
             mMinute,

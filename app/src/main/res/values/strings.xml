@@ -4,6 +4,7 @@
     <string name="empty">Null</string>
     <string name="app_name">Recreation Center app</string>
     <string name="title_home">Home</string>
+    <string name="title_event">Play</string>
     <string name="title_play">Play</string>
     <string name="title_post">Learn</string>
     <string name="title_calendar">Calendar</string>
@@ -14,6 +15,7 @@
 
     <string name="welcomeBtn">Let\'s get started</string>
     <string name="welcomeMsg">Welcome</string>
+    <string name="goBack">Go back to App</string>
 
     <!--    Login Page-->
     <string name="emailHint">Email address</string>
@@ -24,6 +26,7 @@
     <string name="registerHint">Don\'t have an account?</string>
     <string name="registerLink">Click here to Sign up</string>
     <string name="signIn">Sign in</string>
+    <string name="forgotPassword">Forgot Password?</string>
 
     <!--    Register Page-->
     <string name="fNameHint">First name</string>
@@ -61,4 +64,9 @@
         <item>Aerobic</item>
         <item>Soccer</item>
     </string-array>
+
+<!--    Profile Page-->
+    <string name="updateProfile">Update profile</string>
+    <string name="editProfile">Edit profile</string>
+    <string name='logout'>Logout</string>
 </resources>

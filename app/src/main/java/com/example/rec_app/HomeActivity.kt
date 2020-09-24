@@ -4,16 +4,17 @@ import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.rec_app.ui.sportActivity.SportActivityViewModel
 import kotlinx.android.synthetic.main.activity_home.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
     var sportActivityViewModel: SportActivityViewModel? = null
@@ -37,5 +38,11 @@ class HomeActivity : AppCompatActivity() {
     fun createPlay(view: View) {
         val createPlayIntent = Intent(this, CreatePlayActivity::class.java)
         startActivity(createPlayIntent)
+    }
+
+    private fun getCurrentUser(): String? {
+        var spf = getSharedPreferences("loggedUser", 0)
+        val editor = spf.edit()
+        return spf.getString("userID", null)
     }
 }
