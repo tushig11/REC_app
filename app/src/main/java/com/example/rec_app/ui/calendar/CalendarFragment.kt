@@ -1,7 +1,8 @@
 package com.example.rec_app.ui.calendar
 
-import EventObjects
+import com.example.rec_app.model.EventObjects
 import android.graphics.Color
+import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import com.example.rec_app.R
 import kotlinx.android.synthetic.main.fragment_calendar.*
@@ -35,22 +37,23 @@ class CalendarFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_calendar, container, false)
 
-//        viewModel.text.observe(viewLifecycleOwner, Observer {  text_calendar.text = it  })
-
+        viewModel.getActvities().observe(viewLifecycleOwner, Observer {
+            dailyEvent = it.map { activity -> EventObjects(activity.sportType!!, convertStringToDate("${activity.date} ${activity.startTime}"), convertStringToDate("${activity.date} ${activity.endTime}")) }
+            displayDailyEvents()
+        })
         return root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onStart() {
+        super.onStart()
+//        dailyEvent = FirestoreRepository().getEventsList()
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         eventIndex = mLayout.childCount
         initialChildCnt = eventIndex
-
-        dailyEvent = listOf<EventObjects>(
-            EventObjects("THIS IS 21ST",convertStringToDate("21-09-2020 13:00"),convertStringToDate("21-09-2020 15:00")),
-            EventObjects("THIS IS 22ND",convertStringToDate("22-09-2020 21:00"),convertStringToDate("22-09-2020 22:00")),
-            EventObjects("THIS IS 23RD",convertStringToDate("23-09-2020 07:00"),convertStringToDate("23-09-2020 08:00"))
-        )
 
         display_current_date.text = displayDateInString(cal.time)
         displayDailyEvents()
@@ -65,7 +68,7 @@ class CalendarFragment : Fragment() {
     }
 
     private fun convertStringToDate(dateInString: String): Date {
-        val format: DateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.ENGLISH)
+        val format: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH)
         var date: Date? = null
         try {
             date = format.parse(dateInString)
@@ -173,6 +176,5 @@ class CalendarFragment : Fragment() {
     companion object {
         private val TAG = CalendarFragment::class.java.simpleName
     }
-
 
 }

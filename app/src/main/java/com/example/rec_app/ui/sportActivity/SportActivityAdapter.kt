@@ -1,4 +1,4 @@
-package com.example.rec_app
+package com.example.rec_app.ui.sportActivity
 
 import android.content.Context
 import android.os.Build
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rec_app.R
 import com.example.rec_app.model.SportActivity
 import java.time.format.DateTimeFormatter
 
@@ -15,9 +16,9 @@ class SportActivityAdapter(var context: Context, var sportActivities: ArrayList<
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.username.text = sportActivities!![position].userId.toString()
+        holder.username.text = sportActivities!![position].fullname.toString()
         holder.pals.text = sportActivities!![position].playpals?.map { p -> p.toString() }?.joinToString(", ")
-
+        holder.type.text = sportActivities!![position].sportType.toString()
         var dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
         var endFormatter = DateTimeFormatter.ofPattern("hh:mm a")
 
@@ -27,7 +28,7 @@ class SportActivityAdapter(var context: Context, var sportActivities: ArrayList<
                 sportActivities!![position].endTime?.format(endFormatter)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SportActivityAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.layout_sport_activity, parent, false)
         return MyViewHolder(v)
     }
@@ -41,6 +42,7 @@ class SportActivityAdapter(var context: Context, var sportActivities: ArrayList<
         var date : TextView = itemView.findViewById<TextView>(R.id.date)
         var time : TextView = itemView.findViewById<TextView>(R.id.timeInfo)
         var pals: TextView = itemView.findViewById<TextView>(R.id.playpals)
+        var type: TextView = itemView.findViewById<TextView>(R.id.sportType)
     }
 
 }

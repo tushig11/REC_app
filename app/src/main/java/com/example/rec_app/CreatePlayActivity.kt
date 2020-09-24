@@ -2,31 +2,31 @@ package com.example.rec_app
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import android.widget.Toast.*
+import android.widget.Toast.LENGTH_LONG
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rec_app.model.SportActivity
 import com.example.rec_app.model.User
 import com.example.rec_app.repository.FirestoreRepository
 import kotlinx.android.synthetic.main.activity_create_play.*
-import kotlinx.android.synthetic.main.layout_sport_activity.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+
 import java.util.*
-import java.util.stream.Collectors
 import kotlin.collections.ArrayList
 
-class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
+class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
+    private val RESULT_ACTIVITY_CODE = 999
     private var aNewActivity : SportActivity? = null
-    private var userList = ArrayList<User>()
     @RequiresApi(Build.VERSION_CODES.O)
     private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
@@ -52,7 +52,11 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         var friendsAsList = FirestoreRepository().getUsers()
 
         // Create adapter and add in AutoCompleteTextView
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, friendsAsList)
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_dropdown_item,
+            friendsAsList
+        )
         autotextView.setAdapter(adapter)
 
         //val inviteButton = findViewById<Button>(R.id.btn_invite)
@@ -61,8 +65,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, friendsList)
         listView.adapter = listAdapter
 
-        autotextView.onItemClickListener = AdapterView.OnItemClickListener{
-                parent, view, position, id ->
+        autotextView.onItemClickListener = AdapterView.OnItemClickListener{ parent, view, position, id ->
 
             val u: User = parent.getItemAtPosition(position) as User
             val fullname = u.toString()
@@ -78,6 +81,15 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
             autotextView.text.clear()
 
             toast(fullname + " is added to invite list")
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FirestoreRepository().getCurrentUser().get().addOnSuccessListener {
+            val name = "${it.data!!["fname"].toString()} ${it.data!!["lname"].toString()}"
+            aNewActivity!!.fullname = name
         }
     }
 
@@ -109,7 +121,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val dpd = DatePickerDialog(
             this,
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                if(isValidDate(year, monthOfYear, dayOfMonth)) {
+                if (isValidDate(year, monthOfYear, dayOfMonth)) {
                     var m: String = (101 + monthOfYear).toString().substring(1)
                     var d: String = (100 + dayOfMonth).toString().substring(1)
 
@@ -145,7 +157,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val tpd = TimePickerDialog(
             this,
             TimePickerDialog.OnTimeSetListener { view, hour, minute ->
-                if(isValidStartingTime(hour, minute)) {
+                if (isValidStartingTime(hour, minute)) {
                     var h: String = (100 + hour).toString().substring(1)
                     var m: String = (100 + minute).toString().substring(1)
                     aNewActivity?.startTime = "$h:$m"
@@ -177,7 +189,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val tpd = TimePickerDialog(
             this,
             TimePickerDialog.OnTimeSetListener { view, hour, minute ->
-                if(isValidEndingTime(hour, minute)) {
+                if (isValidEndingTime(hour, minute)) {
                     var h: String = (100 + hour).toString().substring(1)
                     var m: String = (100 + minute).toString().substring(1)
                     aNewActivity?.endTime = "$h:$m"
@@ -212,12 +224,11 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
             println(pp.toString())
             Log.d("", pp.toString())
         }
-        toast(aNewActivity.toString())
+//        toast(aNewActivity.toString())
         aNewActivity!!.id = UUID.randomUUID().toString()
         if(saveActivity()) {
-
             toast("Saved successfully!")
-            //close page
+            returnResult()
         } else {
             toast("Could not connect to the server. Try again!")
         }
@@ -230,7 +241,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun isValidDate(year : Int, month : Int, day : Int): Boolean {
+    fun isValidDate(year: Int, month: Int, day: Int): Boolean {
         var current = LocalDateTime.now();
         if(year < current.year
             || (year == current.year && month + 1 < current.month.value)
@@ -287,7 +298,13 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
             btn_ending_time_choose.text = aNewActivity?.endTime!!.format(timeFormatter)
     }
 
-    fun toast(txt : String) {
+    fun toast(txt: String) {
         Toast.makeText(this, txt, LENGTH_LONG).show()
+    }
+
+    private fun returnResult(){
+        val returnIntent = Intent()
+        setResult(RESULT_ACTIVITY_CODE, returnIntent)
+        finish()
     }
 }

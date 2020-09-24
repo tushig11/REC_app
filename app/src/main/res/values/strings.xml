@@ -49,8 +49,8 @@
 
     <!-- Create Activity-->
     <string name="choose_date">Choose date...</string>
-    <string name="choose_start_time">Choose date...</string>
-    <string name="choose_end_time">Choose date...</string>
+    <string name="choose_start_time">Choose start time...</string>
+    <string name="choose_end_time">Choose end time...</string>
     <string name="type_friends">Type your friend name here</string>
     <string name="invited_friends">Invited friends</string>
     <string name="add">Add</string>

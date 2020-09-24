@@ -1,3 +1,6 @@
+package com.example.rec_app.model
+
+import java.time.LocalDateTime
 import java.util.*
 
 class EventObjects {
@@ -23,4 +26,7 @@ class EventObjects {
         this.end = end
     }
 
+    override fun toString(): String {
+        return "$message / $date / $end"
+    }
 }

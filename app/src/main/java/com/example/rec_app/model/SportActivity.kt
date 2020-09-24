@@ -15,11 +15,13 @@ class SportActivity {
     var startTime: String? = null
     var endTime: String? = null
     var playpals: ArrayList<User>? = null
+    var fullname: String? = null
 
     constructor(userId : String) {
         this.userId = userId
     }
 
+    constructor()
     constructor(
         id: String,
         userId: String?,
@@ -27,7 +29,8 @@ class SportActivity {
         date: String?,
         startTime: String?,
         endTime: String?,
-        playpals: ArrayList<User>?
+        playpals: ArrayList<User>?,
+        fullname: String?
     ) {
         this.id = id
         this.userId = userId
@@ -36,6 +39,7 @@ class SportActivity {
         this.startTime = startTime
         this.endTime = endTime
         this.playpals = playpals
+        this.fullname = fullname
     }
 
     override fun toString(): String {
