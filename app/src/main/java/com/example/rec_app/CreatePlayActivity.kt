@@ -10,7 +10,7 @@ import android.widget.Toast.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rec_app.classes.SportActivity
-import com.example.rec_app.classes.User
+import com.example.rec_app.model.User
 import com.example.rec_app.repository.FirestoreRepository
 import kotlinx.android.synthetic.main.activity_create_play.*
 import java.time.LocalDate
@@ -31,7 +31,8 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
     private val dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
 
     private var friendsList : ArrayList<String> = ArrayList<String>()
-
+    private val friends = FirestoreRepository().getUsers()
+    private var selectetUser: User? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_play)
@@ -44,23 +45,27 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
         val autotextView = findViewById<AutoCompleteTextView>(R.id.playpals_choose)
         // Get the array of friends
-        val friends = resources.getStringArray(R.array.sport_types)//<sport_types must be replaced by friends list
+//        val friends = resources.getStringArray(R.array.sport_types)//<sport_types must be replaced by friends list
         // Create adapter and add in AutoCompleteTextView
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, FirestoreRepository().getUsers())
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, friends)
         autotextView.setAdapter(adapter)
 
         //val inviteButton = findViewById<Button>(R.id.btn_invite)
         val listView: ListView = findViewById<ListView>(R.id.playpals_list)
 
         val listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, friendsList)
-        listView.setAdapter(listAdapter)
+        listView.adapter = listAdapter
 
-        //inviteButton.setOnClickListener(View.OnClickListener {
-        btn_invite.setOnClickListener(View.OnClickListener {
+
+        autotextView.onItemClickListener = AdapterView.OnItemClickListener{
+                parent, view, position, id ->
+            val selectedItem = parent.getItemAtPosition(position) as User
+            parent.adapter.getItem(id.toInt()).toString()
             friendsList.add(autotextView.text.toString())
             listAdapter.notifyDataSetChanged()
             autotextView.text.clear()
-        })
+            Toast.makeText(applicationContext,"Selected : ${selectedItem.email}",Toast.LENGTH_SHORT).show()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
