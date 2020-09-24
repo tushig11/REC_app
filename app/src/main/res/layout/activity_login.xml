@@ -113,45 +113,24 @@
                     android:src="@drawable/stroke" />
             </LinearLayout>
 
-            <LinearLayout
+
+            <Button
+                android:id="@+id/googleBtn"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/googleBtn"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:onClick="googleLogin"
-                    android:text="@string/google"
-                    app:icon="@drawable/logo_google"
-                    app:iconSize="24dp"
-                    app:iconTint="@null" />
-
-                <Button
-                    android:id="@+id/facebookBtn"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="1"
-                    android:onClick="facebookLogin"
-                    android:text="@string/facebook"
-                    app:icon="@drawable/logo_fb"
-                    app:iconSize="24dp"
-                    app:iconTint="@null"
-                    android:layout_marginBottom="20dp"/>
-            </LinearLayout>
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:onClick="googleLogin"
+                android:text="@string/google"
+                app:icon="@drawable/logo_google"
+                app:iconSize="24dp"
+                app:iconGravity="textStart"
+                app:iconTint="@null" />
 
             <TextView
                 android:id="@+id/registerHint"
