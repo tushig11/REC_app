@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.rec_app.classes.SportActivity
 import com.example.rec_app.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -15,6 +14,11 @@ class FirestoreRepository {
     var user = FirebaseAuth.getInstance().currentUser
 
     // get saved users from fire store
+
+    fun getLoggedUserID(): String{
+        return FirebaseAuth.getInstance().currentUser!!.uid
+    }
+
     fun getUsers(): ArrayList<User> {
         val users = ArrayList<User>()
             db.collection("users").get().addOnSuccessListener {
