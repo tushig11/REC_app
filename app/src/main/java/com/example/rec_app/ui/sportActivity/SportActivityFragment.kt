@@ -1,6 +1,5 @@
 package com.example.rec_app.ui.sportActivity
 
-import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +12,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rec_app.R
 import com.example.rec_app.SportActivityAdapter
-import com.example.rec_app.classes.SportActivity
-import com.example.rec_app.classes.User
+import com.example.rec_app.model.SportActivity
+import com.example.rec_app.model.User
 import kotlinx.android.synthetic.main.fragment_sport_activity.view.*
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 
 

@@ -4,13 +4,14 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.Toast.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.rec_app.classes.SportActivity
-import com.example.rec_app.classes.User
+import com.example.rec_app.model.SportActivity
+import com.example.rec_app.model.User
 import com.example.rec_app.repository.FirestoreRepository
 import kotlinx.android.synthetic.main.activity_create_play.*
 import java.time.LocalDate
@@ -18,6 +19,7 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.stream.Collectors
 import kotlin.collections.ArrayList
 
 class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
@@ -32,6 +34,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
     private var friendsList : ArrayList<String> = ArrayList<String>()
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_play)
@@ -44,9 +47,13 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
         val autotextView = findViewById<AutoCompleteTextView>(R.id.playpals_choose)
         // Get the array of friends
-        val friends = resources.getStringArray(R.array.sport_types)//<sport_types must be replaced by friends list
+        var friendsAsList = FirestoreRepository().getUsers()
+
+        var friendsAsMap = FirestoreRepository().getUsers().map{u -> u.toString() to u}.toMap();
+        Log.d("", friendsAsMap.size.toString())
+
         // Create adapter and add in AutoCompleteTextView
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, FirestoreRepository().getUsers())
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, friendsAsList)
         autotextView.setAdapter(adapter)
 
         //val inviteButton = findViewById<Button>(R.id.btn_invite)
@@ -55,12 +62,23 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, friendsList)
         listView.setAdapter(listAdapter)
 
+        autotextView.onItemClickListener = AdapterView.OnItemClickListener{
+                parent, view, position, id ->
+            val u: User = parent.getItemAtPosition(position) as User
+            val fullname = u.toString()
+
+            aNewActivity?.playpals?.add(u)
+            friendsList.add(fullname)
+            autotextView.text.clear()
+
+            toast(fullname + " is added to invite list")
+        }
         //inviteButton.setOnClickListener(View.OnClickListener {
-        btn_invite.setOnClickListener(View.OnClickListener {
-            friendsList.add(autotextView.text.toString())
+        /*btn_invite.setOnClickListener(View.OnClickListener {
+            //friendsList.add(autotextView.text.toString())
             listAdapter.notifyDataSetChanged()
             autotextView.text.clear()
-        })
+        })*/
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -183,6 +201,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         }
 
         if(saveActivity()) {
+
             //close page
         } else {
             toast("Could not connect to the server. Try again!")
@@ -191,6 +210,9 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
     fun saveActivity() : Boolean {
         //save into database
+
+
+        //aNewActivity -> db
         return false
     }
 
@@ -222,7 +244,8 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
     }
 
     fun getUserId() : String {
-        return "useId"
+        //return FirestoreRepository().getLoggedUserId()
+        return "userId"
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

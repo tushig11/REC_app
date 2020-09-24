@@ -1,4 +1,4 @@
-package com.example.rec_app.classes
+package com.example.rec_app.model
 
 import java.io.Serializable
 import java.time.LocalDate

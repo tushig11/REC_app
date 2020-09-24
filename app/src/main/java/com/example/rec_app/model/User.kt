@@ -12,6 +12,10 @@ class User: Serializable{
 
     constructor()
 
+    constructor(fname: String) {
+        this.fname = fname
+    }
+
     constructor(id: String, fname: String, lname: String, email: String, imagePath:String?, phone: String){
         this.id= id
         this.fname = fname

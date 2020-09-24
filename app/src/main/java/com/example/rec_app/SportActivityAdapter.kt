@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rec_app.classes.SportActivity
+import com.example.rec_app.model.SportActivity
 import java.time.format.DateTimeFormatter
 
 class SportActivityAdapter(var context: Context, var sportActivities: ArrayList<SportActivity>) : RecyclerView.Adapter<SportActivityAdapter.MyViewHolder>(){
@@ -16,7 +16,7 @@ class SportActivityAdapter(var context: Context, var sportActivities: ArrayList<
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.username.text = sportActivities!![position].userId.toString()
-        holder.pals.text = sportActivities!![position].playpals?.map { p -> p.userName }?.joinToString(", ")
+        holder.pals.text = sportActivities!![position].playpals?.map { p -> p.toString() }?.joinToString(", ")
 
         var dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
         var endFormatter = DateTimeFormatter.ofPattern("hh:mm a")
