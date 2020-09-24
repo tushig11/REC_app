@@ -14,6 +14,7 @@ import com.example.rec_app.model.SportActivity
 import com.example.rec_app.model.User
 import com.example.rec_app.repository.FirestoreRepository
 import kotlinx.android.synthetic.main.activity_create_play.*
+import kotlinx.android.synthetic.main.layout_sport_activity.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -27,10 +28,10 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
     private var aNewActivity : SportActivity? = null
     private var userList = ArrayList<User>()
     @RequiresApi(Build.VERSION_CODES.O)
-    private val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a")
+    private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private val dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
+    private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
     private var friendsList : ArrayList<String> = ArrayList<String>()
 
@@ -44,13 +45,11 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         btn_date_choose.setOnClickListener(this)
         btn_starting_time_choose.setOnClickListener(this)
         btn_ending_time_choose.setOnClickListener(this)
+        btn_submit.setOnClickListener(this)
 
         val autotextView = findViewById<AutoCompleteTextView>(R.id.playpals_choose)
         // Get the array of friends
         var friendsAsList = FirestoreRepository().getUsers()
-
-        var friendsAsMap = FirestoreRepository().getUsers().map{u -> u.toString() to u}.toMap();
-        Log.d("", friendsAsMap.size.toString())
 
         // Create adapter and add in AutoCompleteTextView
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, friendsAsList)
@@ -62,14 +61,19 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, friendsList)
         listView.adapter = listAdapter
 
-
         autotextView.onItemClickListener = AdapterView.OnItemClickListener{
                 parent, view, position, id ->
 
             val u: User = parent.getItemAtPosition(position) as User
             val fullname = u.toString()
 
-            aNewActivity?.playpals?.add(u)
+            if(aNewActivity?.playpals == null)
+                aNewActivity?.playpals = ArrayList<User>()
+
+            aNewActivity?.playpals!!.add(u)
+
+            toast(u.toString())
+
             friendsList.add(fullname)
             autotextView.text.clear()
 
@@ -106,7 +110,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
             this,
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 if(isValidDate(year, monthOfYear, dayOfMonth))
-                    aNewActivity?.date = LocalDate.of(year, monthOfYear + 1, dayOfMonth)
+                    aNewActivity?.date = "$year-${monthOfYear + 1}-$dayOfMonth"
                 else {
                     toast("Invalid date chosen")
                     aNewActivity?.date = null
@@ -139,7 +143,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
             this,
             TimePickerDialog.OnTimeSetListener { view, hour, minute ->
                 if(isValidStartingTime(hour, minute))
-                    aNewActivity?.startTime = LocalTime.of(hour, minute)
+                    aNewActivity?.startTime = "$hour:$minute"
                 else {
                     toast("Invalid start time chosen")
                     aNewActivity?.startTime = null
@@ -169,7 +173,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
             this,
             TimePickerDialog.OnTimeSetListener { view, hour, minute ->
                 if(isValidEndingTime(hour, minute)) {
-                    aNewActivity?.endTime = LocalTime.of(hour, minute)
+                    aNewActivity?.endTime = "$hour:$minute"
                 } else {
                     toast("Invalid end time chosen")
                     aNewActivity?.endTime = null;
@@ -185,7 +189,8 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun onClickOnSubmitBtn() {
-
+        toast("Clicked")
+        aNewActivity?.sportType = spr_sport_type.selectedItem.toString()
         if(aNewActivity?.sportType == null) {
             toast("Choose sport type!")
             return
@@ -196,8 +201,15 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
             return
         }
 
+        aNewActivity!!.playpals?.forEach { pp ->
+            println(pp.toString())
+            Log.d("", pp.toString())
+        }
+        toast(aNewActivity.toString())
+        aNewActivity!!.id = UUID.randomUUID().toString()
         if(saveActivity()) {
 
+            toast("Saved successfully!")
             //close page
         } else {
             toast("Could not connect to the server. Try again!")
@@ -206,10 +218,8 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
     fun saveActivity() : Boolean {
         //save into database
-
-
-        //aNewActivity -> db
-        return false
+        FirestoreRepository().saveSportActivity(aNewActivity!!)
+        return true
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -225,9 +235,11 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
     @RequiresApi(Build.VERSION_CODES.O)
     private fun isValidStartingTime(hour: Int, minute: Int): Boolean {
         var current = LocalDateTime.now();
-        if(current.year == aNewActivity?.date?.year
-            && current.month.value == aNewActivity?.date?.month?.value
-            && current.dayOfMonth == aNewActivity?.date?.dayOfMonth) {
+        var selectedDate = LocalDate.parse(aNewActivity?.date!!, dateFormatter)
+
+        if(current.year == selectedDate.year
+            && current.month.value == selectedDate.month?.value
+            && current.dayOfMonth == selectedDate.dayOfMonth) {
             return (current.hour < hour || current.hour == hour && current.minute < minute)
         }
         return true;
@@ -235,21 +247,21 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun isValidEndingTime(hour: Int, minute: Int): Boolean {
-        return (hour > aNewActivity?.startTime!!.hour
-            || hour == aNewActivity?.startTime!!.hour && minute > aNewActivity?.startTime!!.minute)
+        var selectedStartTime = LocalTime.parse(aNewActivity?.startTime!!, timeFormatter)
+        return (hour > selectedStartTime.hour
+            || hour == selectedStartTime.hour && minute > selectedStartTime.minute)
     }
 
     fun getUserId() : String {
-        //return FirestoreRepository().getLoggedUserId()
-        return "userId"
+        return FirestoreRepository().getLoggedUserID()
     }
-    
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateDateText() {
         if(aNewActivity?.date == null)
             btn_date_choose.text = "Choose date..."
         else
-            btn_date_choose.text = aNewActivity?.date!!.format(dateFormatter)
+            btn_date_choose.text = aNewActivity?.date!!
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -257,7 +269,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         if(aNewActivity?.startTime == null)
             btn_starting_time_choose.text = "Choose start time..."
         else
-            btn_starting_time_choose.text = aNewActivity?.startTime!!.format(timeFormatter)
+            btn_starting_time_choose.text = aNewActivity?.startTime!!
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

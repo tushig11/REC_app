@@ -1,7 +1,7 @@
 package com.example.rec_app.repository
 
 import android.util.Log
-import com.example.rec_app.classes.SportActivity
+import com.example.rec_app.model.SportActivity
 import com.example.rec_app.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference

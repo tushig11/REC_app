@@ -48,27 +48,27 @@ class SportActivityFragment : Fragment() {
         var playpals2 = arrayListOf(User("Tom"), User("Jerry"))
 
         var activity1 = SportActivity(
-            1, "Maharishi",
-            "Basketball", LocalDate.of(2020, 9, 22),
-            LocalTime.of(9, 30), LocalTime.of(11, 30), playpals1
+            "1", "Maharishi",
+            "Basketball", "2020-09-22",
+            "09:30", "11:30", playpals1
         )
 
         var activity2 = SportActivity(
-            2, "Mahesh",
-           "Badmington", LocalDate.of(2020, 9, 22),
-            LocalTime.of(9, 30), LocalTime.of(11, 30), playpals2
+            "2", "Mahesh",
+           "Badmington", "2020-09-22",
+            "09:30", "11:30", playpals2
         )
 
         var activity3 = SportActivity(
-            3, "Yogi",
-           "Basketball", LocalDate.of(2020, 9, 22),
-            LocalTime.of(9, 30), LocalTime.of(11, 30), null
+            "3", "Yogi",
+           "Basketball", "2020-09-22",
+            "09:30", "11:30", null
         )
 
         var activity4 = SportActivity(
-            4, "Somesh",
-            "Basketball", LocalDate.of(2020, 9, 22),
-            LocalTime.of(9, 30), LocalTime.of(11, 30), null
+            "4", "Somesh",
+            "Basketball", "2020-09-22",
+            "09:30", "11:30", null
         )
 
         sportActivities = arrayListOf(activity1, activity2, activity3, activity4)
