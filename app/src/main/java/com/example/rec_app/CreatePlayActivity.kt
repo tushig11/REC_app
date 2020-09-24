@@ -109,9 +109,12 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val dpd = DatePickerDialog(
             this,
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                if(isValidDate(year, monthOfYear, dayOfMonth))
-                    aNewActivity?.date = "$year-${monthOfYear + 1}-$dayOfMonth"
-                else {
+                if(isValidDate(year, monthOfYear, dayOfMonth)) {
+                    var m: String = (101 + monthOfYear).toString().substring(1)
+                    var d: String = (100 + dayOfMonth).toString().substring(1)
+
+                    aNewActivity?.date = "$year-$m-$d"
+                } else {
                     toast("Invalid date chosen")
                     aNewActivity?.date = null
                 }
@@ -142,9 +145,11 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         val tpd = TimePickerDialog(
             this,
             TimePickerDialog.OnTimeSetListener { view, hour, minute ->
-                if(isValidStartingTime(hour, minute))
-                    aNewActivity?.startTime = "$hour:$minute"
-                else {
+                if(isValidStartingTime(hour, minute)) {
+                    var h: String = (100 + hour).toString().substring(1)
+                    var m: String = (100 + minute).toString().substring(1)
+                    aNewActivity?.startTime = "$h:$m"
+                } else {
                     toast("Invalid start time chosen")
                     aNewActivity?.startTime = null
                 }
@@ -173,7 +178,9 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
             this,
             TimePickerDialog.OnTimeSetListener { view, hour, minute ->
                 if(isValidEndingTime(hour, minute)) {
-                    aNewActivity?.endTime = "$hour:$minute"
+                    var h: String = (100 + hour).toString().substring(1)
+                    var m: String = (100 + minute).toString().substring(1)
+                    aNewActivity?.endTime = "$h:$m"
                 } else {
                     toast("Invalid end time chosen")
                     aNewActivity?.endTime = null;
