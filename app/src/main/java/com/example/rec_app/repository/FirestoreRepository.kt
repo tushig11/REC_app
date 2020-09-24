@@ -14,8 +14,21 @@ class FirestoreRepository {
     var user = FirebaseAuth.getInstance().currentUser
 
     // get saved users from fire store
-    fun getUsers(): CollectionReference {
-        return db.collection("users")
+    fun getUsers(): ArrayList<User> {
+        val users = ArrayList<User>()
+            db.collection("users").get().addOnSuccessListener {
+                for(doc in it){
+                    val newUser = User(doc.id.toString(),
+                        doc.data["fname"] as String,
+                        doc.data["lname"] as String,
+                        doc.data["email"] as String,
+                        doc.data["imagePath"] as String?,
+                        doc.data["phone"] as String
+                    )
+                users.add(newUser)
+            }
+            }
+        return users
     }
 
     fun getCurrentUser(): DocumentReference{
@@ -48,14 +61,4 @@ class FirestoreRepository {
             ))
     }
 
-    fun createNewUser(user: User){
-        db.collection("users").document("DocumentName")
-            .set(user)
-            .addOnSuccessListener {
-                Log.d("HomeActivity","Document added $it")
-            }
-            .addOnFailureListener(){
-                Log.d("HomeActivity","Document added ${it.toString()}")
-            }
-    }
 }

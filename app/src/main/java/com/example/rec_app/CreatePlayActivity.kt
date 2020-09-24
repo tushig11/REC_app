@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rec_app.classes.SportActivity
 import com.example.rec_app.classes.User
+import com.example.rec_app.repository.FirestoreRepository
 import kotlinx.android.synthetic.main.activity_create_play.*
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -22,7 +23,7 @@ import kotlin.collections.ArrayList
 class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
 
     private var aNewActivity : SportActivity? = null
-
+    private var userList = ArrayList<User>()
     @RequiresApi(Build.VERSION_CODES.O)
     private val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a")
 
@@ -45,7 +46,7 @@ class CreatePlayActivity : AppCompatActivity(), View.OnClickListener{
         // Get the array of friends
         val friends = resources.getStringArray(R.array.sport_types)//<sport_types must be replaced by friends list
         // Create adapter and add in AutoCompleteTextView
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, friends)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, FirestoreRepository().getUsers())
         autotextView.setAdapter(adapter)
 
         //val inviteButton = findViewById<Button>(R.id.btn_invite)
