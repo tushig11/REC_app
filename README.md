@@ -6,6 +6,13 @@ Once user enter to the system, he/she can create a new activity for available ti
 Also, the user has a possibility invite his friend to play with as well as able to see activity history. 
 In addition, the system has a learn part which contains video tutorial.
 
-<div>
-  <img width="200" rc="/app/src/main/res/drawable-v24/image_welcome.png">
+<div style="display:flex;">
+<img alt="App image" src="/app/src/main/res/drawable-v24/image_welcome.png" width="30%">
+<img alt="App image" src="/app/src/main/res/drawable-v24/image_login.png" width="30%">
+<img alt="App image" src="/app/src/main/res/drawable-v24/image_home.png" width="30%">
+</div>
+
+<div style="display:flex;">
+<img alt="App image" src="/app/src/main/res/drawable-v24/image_profile.png" width="30%">
+<img alt="App image" src="/app/src/main/res/drawable-v24/image_events.png" width="30%">
 </div>
