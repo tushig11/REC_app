@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_event"
-        android:name="com.example.rec_app.ui.event.EventFragment"
-        android:label="@string/title_event"
-        tools:layout="@layout/fragment_event" />
+        android:id="@+id/navigation_sport_activity"
+        android:name="com.example.rec_app.ui.sportActivity.SportActivityFragment"
+        android:label="@string/title_play"
+        tools:layout="@layout/fragment_sport_activity" />
 
     <fragment
         android:id="@+id/navigation_post"

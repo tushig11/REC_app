@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         root.carouselView.setImageListener(imageListener);
 
         root.playBtn.setOnClickListener{
-            this.findNavController().navigate(R.id.navigation_event)
+            this.findNavController().navigate(R.id.navigation_sport_activity)
         }
 
         root.calendarBtn.setOnClickListener{
@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
         }
 
         root.home_playImage.setOnClickListener{
-            this.findNavController().navigate(R.id.navigation_event)
+            this.findNavController().navigate(R.id.navigation_sport_activity)
         }
 
         root.home_learnImage.setOnClickListener{
